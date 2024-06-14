@@ -12,4 +12,9 @@ public class CustomException extends RuntimeException {
     public CustomException(Error error) {
         this.error = error;
     }
+
+    @Override
+    public synchronized Throwable fillInStackTrace() {
+        return this;
+    }
 }
