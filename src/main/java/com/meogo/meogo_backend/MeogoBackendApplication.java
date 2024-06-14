@@ -9,5 +9,4 @@ public class MeogoBackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(MeogoBackendApplication.class, args);
     }
-
 }
