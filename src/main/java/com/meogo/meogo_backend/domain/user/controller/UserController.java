@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/users")
 public class UserController {
-    private final CheckUserIdUseCase checkUserIdUseCase;
-
     @GetMapping("/check-userid")
     public CheckUserIdResponse checkUserId(@RequestParam String id) {
         return CheckUserIdResponse.of(id, checkUserIdUseCase.doesExist(id));
     }
+
+    private final CheckUserIdUseCase checkUserIdUseCase;
 }

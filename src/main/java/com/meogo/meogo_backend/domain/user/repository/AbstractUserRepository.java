@@ -5,8 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public abstract class AbstractUserRepository implements UserRepository {
-    private final UserCrudRepository userRepository;
-
     @Override
     public UserEntity save(UserEntity entity) {
         return userRepository.save(entity);
@@ -16,4 +14,6 @@ public abstract class AbstractUserRepository implements UserRepository {
     public boolean existsByUserId(String userId) {
         return userRepository.existsByUserId(userId);
     }
+
+    private final UserCrudRepository userRepository;
 }

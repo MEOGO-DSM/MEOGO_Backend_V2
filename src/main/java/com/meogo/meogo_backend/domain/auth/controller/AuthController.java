@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
 public class AuthController {
-    private final UserRegisterUseCase userRegisterUseCase;
-
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public void register(@Valid @RequestBody UserRegisterRequest request) {
         userRegisterUseCase.register(request);
     }
+
+    private final UserRegisterUseCase userRegisterUseCase;
 }

@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class CheckUserIdService implements CheckUserIdUseCase {
-    private final UserRepository userRepository;
-
     @Override
     public boolean doesExist(String userId) {
         return userRepository.existsByUserId(userId);
     }
+
+    private final UserRepository userRepository;
 }
