@@ -3,6 +3,8 @@ package com.meogo.meogo_backend.domain.auth.service;
 import com.meogo.meogo_backend.domain.auth.dto.UserRegisterRequest;
 import com.meogo.meogo_backend.domain.auth.usecase.UserRegisterUseCase;
 import com.meogo.meogo_backend.domain.user.model.UserEntity;
+import com.meogo.meogo_backend.domain.user.model.UserModel;
+import com.meogo.meogo_backend.domain.user.model.UserRole;
 import com.meogo.meogo_backend.domain.user.repository.UserRepository;
 import com.meogo.meogo_backend.global.exception.custom.ExistingUserIdException;
 import lombok.RequiredArgsConstructor;
@@ -29,13 +31,14 @@ public class UserRegisterService implements UserRegisterUseCase {
     }
 
     private UserEntity createEntity(UserRegisterRequest request) {
-        return UserEntity.createUserEntity(
+        return UserModel.createUserEntity(
                 request.name(),
                 request.userId(),
                 passwordEncoder.encode(
                         request.password()
                 ),
-                request.enrolledSchool()
+                request.enrolledSchool(),
+                UserRole.USER
         );
     }
 
