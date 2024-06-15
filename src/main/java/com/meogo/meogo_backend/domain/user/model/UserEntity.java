@@ -1,12 +1,11 @@
 package com.meogo.meogo_backend.domain.user.model;
 
-import com.meogo.meogo_backend.domain.auth.dto.UserRegisterRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
 
-@Entity
 @Getter
-public class UserEntity {
+@Entity
+public class UserEntity implements UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,23 +20,26 @@ public class UserEntity {
 
     private String enrolledSchool;
 
-    protected UserEntity() {}
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
-    private UserEntity(String name, String userId, String password, String enrolledSchool) {
+    protected UserEntity(String name, String userId, String password, String enrolledSchool, UserRole role) {
         this.name = name;
         this.userId = userId;
         this.password = password;
         this.enrolledSchool = enrolledSchool;
+        this.role = role;
     }
 
-    public static UserEntity createUserEntity(String name, String userId, String password, String enrolledSchool) {
-        return new UserEntity(name, userId, password, enrolledSchool);
+    protected UserEntity() {
     }
 
+    @Override
     public void changePassword(String password) {
         this.password = password;
     }
 
+    @Override
     public void updateEnrolledSchool(String enrolledSchool) {
         this.enrolledSchool = enrolledSchool;
     }
