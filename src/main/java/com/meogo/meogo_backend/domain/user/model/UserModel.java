@@ -4,6 +4,7 @@ public interface UserModel {
     void changePassword(String password);
     void updateEnrolledSchool(String enrolledSchool);
 
+    Long getId();
     String getName();
     String getUserId();
     String getPassword();
