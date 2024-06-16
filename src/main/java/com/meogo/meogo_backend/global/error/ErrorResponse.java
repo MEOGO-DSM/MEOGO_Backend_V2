@@ -8,6 +8,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public record ErrorResponse(
         int status,
@@ -21,13 +22,14 @@ public record ErrorResponse(
         return new ErrorResponse(status, message, timestamp, path, exception);
     }
 
-    public static ResponseEntity<ErrorResponse> of(Error error, HttpServletRequest request, CustomException e) {
+    public static ResponseEntity<ErrorResponse> of(CustomException e, HttpServletRequest request) {
+        Error error = e.getError();
         int status = error.getStatus();
 
         return ResponseEntity.status(status)
                 .body(of(status,
                         error.getMessage(),
-                        (new Timestamp(System.currentTimeMillis())).toString(),
+                        LocalDateTime.now().toString(),
                         String.format("%s: %s", request.getMethod(), request.getRequestURI()),
                         e.getClass().getSimpleName()
                 ));
@@ -40,7 +42,7 @@ public record ErrorResponse(
         return ResponseEntity.badRequest()
                 .body(of(HttpStatus.BAD_REQUEST.value(),
                         fieldError.getDefaultMessage(),
-                        (new Timestamp(System.currentTimeMillis())).toString(),
+                        LocalDateTime.now().toString(),
                         String.format("%s: %s", request.getMethod(), request.getRequestURI()),
                         e.getClass().getSimpleName()
                 ));

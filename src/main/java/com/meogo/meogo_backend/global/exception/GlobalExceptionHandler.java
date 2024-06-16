@@ -12,7 +12,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ErrorResponse> handle(CustomException e, HttpServletRequest request) {
-        return ErrorResponse.of(e.getError(), request, e);
+        return ErrorResponse.of(e, request);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
