@@ -1,6 +1,9 @@
 package com.meogo.meogo_backend.domain.auth.controller;
 
+import com.meogo.meogo_backend.domain.auth.dto.UserLoginRequest;
+import com.meogo.meogo_backend.domain.auth.dto.UserLoginResponse;
 import com.meogo.meogo_backend.domain.auth.dto.UserRegisterRequest;
+import com.meogo.meogo_backend.domain.auth.usecase.UserLoginUseCase;
 import com.meogo.meogo_backend.domain.auth.usecase.UserRegisterUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,5 +20,11 @@ public class AuthController {
         userRegisterUseCase.register(request);
     }
 
+    @PostMapping("/login")
+    public UserLoginResponse login(@Valid @RequestBody UserLoginRequest request) {
+        return userLoginUseCase.login(request);
+    }
+
     private final UserRegisterUseCase userRegisterUseCase;
+    private final UserLoginUseCase userLoginUseCase;
 }
