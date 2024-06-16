@@ -1,6 +1,5 @@
 package com.meogo.meogo_backend.global.security.jwt;
 
-import com.meogo.meogo_backend.domain.user.model.UserEntity;
 import com.meogo.meogo_backend.domain.user.model.UserModel;
 import com.meogo.meogo_backend.domain.user.repository.UserRepository;
 import io.jsonwebtoken.Claims;
