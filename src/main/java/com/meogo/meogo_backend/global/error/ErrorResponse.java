@@ -38,7 +38,7 @@ public record ErrorResponse(
 
         assert fieldError != null;
         return ResponseEntity.badRequest()
-                .body(of(400,
+                .body(of(HttpStatus.BAD_REQUEST.value(),
                         fieldError.getDefaultMessage(),
                         (new Timestamp(System.currentTimeMillis())).toString(),
                         String.format("%s: %s", request.getMethod(), request.getRequestURI()),
