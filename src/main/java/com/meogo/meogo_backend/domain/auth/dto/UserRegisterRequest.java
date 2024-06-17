@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public record UserRegisterRequest(
-        @Size(min = 1, max = 4, message = "이름을 1글자 이상 4글자 이하로 입력해주세요.")
+        @Size(min = 2, max = 5, message = "이름을 2글자 이상 5글자 이하로 입력해주세요.")
         String name,
         @Size(min = 5, max = 15, message = "아이디를 5글자 이상 15글자 이하로 입력해주세요.")
         String userId,
