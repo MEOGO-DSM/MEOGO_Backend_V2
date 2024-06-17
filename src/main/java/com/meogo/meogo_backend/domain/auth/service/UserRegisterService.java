@@ -38,6 +38,7 @@ public class UserRegisterService implements UserRegisterUseCase {
                         request.password()
                 ),
                 request.enrolledSchool(),
+                request.email(),
                 UserRole.USER
         );
     }
