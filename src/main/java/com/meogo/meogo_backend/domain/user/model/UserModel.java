@@ -11,7 +11,7 @@ public interface UserModel {
     String getEnrolledSchool();
     UserRole getRole();
 
-    static UserEntity createUserEntity(String name, String userId, String password, String enrolledSchool, UserRole role) {
-        return new UserEntity(name, userId, password, enrolledSchool, role);
+    static UserEntity createUserEntity(String name, String userId, String email, String password, String enrolledSchool, UserRole role) {
+        return new UserEntity(name, userId, email, password, enrolledSchool, role);
     }
 }
