@@ -5,6 +5,7 @@ import com.meogo.meogo_backend.domain.auth.dto.UserLoginResponse;
 import com.meogo.meogo_backend.domain.auth.usecase.UserLoginUseCase;
 import com.meogo.meogo_backend.domain.user.model.UserModel;
 import com.meogo.meogo_backend.domain.user.repository.UserRepository;
+import com.meogo.meogo_backend.global.exception.custom.PasswordNotMatchesException;
 import com.meogo.meogo_backend.global.security.jwt.JwtProperties;
 import com.meogo.meogo_backend.global.security.jwt.Tokenizer;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +40,7 @@ public class UserLoginService implements UserLoginUseCase {
                 .orElseThrow();
 
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
-            throw new RuntimeException();
+            throw PasswordNotMatchesException.EXCEPTION;
         }
         return user;
     }
