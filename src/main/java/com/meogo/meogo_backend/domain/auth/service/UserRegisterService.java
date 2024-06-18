@@ -6,10 +6,12 @@ import com.meogo.meogo_backend.domain.user.model.UserEntity;
 import com.meogo.meogo_backend.domain.user.model.UserModel;
 import com.meogo.meogo_backend.domain.user.model.UserRole;
 import com.meogo.meogo_backend.domain.user.repository.UserRepository;
-import com.meogo.meogo_backend.global.exception.custom.ExistingUserIdException;
+import com.meogo.meogo_backend.global.exception.custom.AlreadyExistingUserIdException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +28,7 @@ public class UserRegisterService implements UserRegisterUseCase {
 
     private void validateUserId(String userId) {
         if (userRepository.existsByUserId(userId)) {
-            throw ExistingUserIdException.EXCEPTION;
+            throw AlreadyExistingUserIdException.EXCEPTION;
         }
     }
 

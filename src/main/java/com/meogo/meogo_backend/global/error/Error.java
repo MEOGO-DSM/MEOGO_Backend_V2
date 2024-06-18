@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum Error {
-    EXISTING_USERID(409, "이미 사용 중인 유저 아이디입니다."),
+    ALREADY_EXISTING_USERID(409, "이미 사용 중인 유저 아이디입니다."),
     TEST(200, "test exception");
 
     private final int status;
