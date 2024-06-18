@@ -36,11 +36,11 @@ public class UserRegisterService implements UserRegisterUseCase {
         return UserModel.createUserEntity(
                 request.name(),
                 request.userId(),
+                request.email(),
                 passwordEncoder.encode(
                         request.password()
                 ),
                 request.enrolledSchool(),
-                request.email(),
                 UserRole.USER
         );
     }

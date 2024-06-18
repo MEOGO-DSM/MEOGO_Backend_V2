@@ -32,8 +32,9 @@ public class SecurityConfig {
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(a -> a
-                .requestMatchers(HttpMethod.GET, "/api/users/check-userid").permitAll()
-                .requestMatchers("/api/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/users/check-userid").permitAll()
+                        .requestMatchers("/api/auth/register").permitAll()
+                        .requestMatchers("/api/auth/login").permitAll()
                 .anyRequest().authenticated())
                 .addFilterBefore(new SecurityTokenFilter(tokenizer), UsernamePasswordAuthenticationFilter.class);
 
