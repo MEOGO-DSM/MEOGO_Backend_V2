@@ -28,12 +28,12 @@ public class SecurityTokenFilter extends OncePerRequestFilter {
     }
 
     private String extractToken(String bearerToken) {
-        if (bearerToken.startsWith(BEARER)) {
+        if (bearerToken != null && bearerToken.startsWith(BEARER)) {
             return bearerToken.substring(7);
         }
         return null;
     }
 
-    private static final String BEARER = "bearer ";
+    private static final String BEARER = "Bearer ";
     private final Tokenizer tokenizer;
 }
