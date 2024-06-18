@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public record ErrorResponse(
@@ -18,7 +17,7 @@ public record ErrorResponse(
         String exception
 ) {
 
-    private static ErrorResponse of(int status, String message, String timestamp, String path, String exception) {
+    public static ErrorResponse of(int status, String message, String timestamp, String path, String exception) {
         return new ErrorResponse(status, message, timestamp, path, exception);
     }
 
