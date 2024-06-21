@@ -1,5 +1,6 @@
 package com.meogo.meogo_backend.domain.community.article.entity;
 
+import com.meogo.meogo_backend.global.converter.StringListConverter;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.validator.constraints.Length;
@@ -23,8 +24,10 @@ public class ArticleEntity implements ArticleModel{
 
   private String schoolName;
 
+  @Convert(converter = StringListConverter.class)
   private List<String> images;
 
+  @Convert(converter = StringListConverter.class)
   private List<String> tags;
 
   protected ArticleEntity(){}
