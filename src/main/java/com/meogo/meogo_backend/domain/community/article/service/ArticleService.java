@@ -7,8 +7,12 @@ import com.meogo.meogo_backend.domain.community.article.entity.ArticleModel;
 import com.meogo.meogo_backend.domain.community.article.repository.ArticleRepository;
 import com.meogo.meogo_backend.domain.community.article.usecase.ArticleUseCase;
 import com.meogo.meogo_backend.global.exception.custom.NotFoundArticleException;
+import com.meogo.meogo_backend.global.security.jwt.JwtProperties;
+import com.meogo.meogo_backend.global.security.jwt.Tokenizer;
+import io.jsonwebtoken.Jwts;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +34,11 @@ public class ArticleService implements ArticleUseCase {
   public void update(Long id, ArticleRequest request, List<MultipartFile> images) {
     ArticleEntity findEntity = repository.findById(id).orElseThrow(NotFoundArticleException::new);
     findEntity.update(request, images);
+  }
+
+  @Override
+  public void delete(Long id) {
+    repository.deleteById(id);
   }
 
   @Override
