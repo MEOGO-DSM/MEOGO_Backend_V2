@@ -1,6 +1,6 @@
 package com.meogo.meogo_backend.domain.community.article.controller;
 
-import com.meogo.meogo_backend.domain.community.article.dto.ArticleCreateRequest;
+import com.meogo.meogo_backend.domain.community.article.dto.ArticleRequest;
 import com.meogo.meogo_backend.domain.community.article.dto.ArticleGetResponse;
 import com.meogo.meogo_backend.domain.community.article.usecase.ArticleUseCase;
 import jakarta.validation.Valid;
@@ -17,8 +17,18 @@ import java.util.List;
 public class ArticleController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public void create(@Valid @RequestPart(name = "request") ArticleCreateRequest request, @RequestPart(name = "images") List<MultipartFile> images){
+  public void create(@Valid @RequestPart(name = "request") ArticleRequest request, @RequestPart(name = "images") List<MultipartFile> images){
     articleUseCase.create(request, images);
+  }
+
+  @PatchMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void update(
+          @PathVariable(name = "id") Long id,
+          @Valid @RequestPart(name = "request") ArticleRequest request,
+          @RequestPart(name = "images") List<MultipartFile> images
+  ){
+    articleUseCase.update(id, request, images);
   }
 
   @GetMapping

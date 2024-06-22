@@ -1,9 +1,11 @@
 package com.meogo.meogo_backend.domain.community.article.entity;
 
+import com.meogo.meogo_backend.domain.community.article.dto.ArticleRequest;
 import com.meogo.meogo_backend.global.converter.StringListConverter;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -38,5 +40,14 @@ public class ArticleEntity implements ArticleModel{
     this.schoolName = schoolName;
     this.images = images;
     this.tags = tags;
+  }
+
+  @Override
+  public void update(ArticleRequest articleRequest, List<MultipartFile> images) {
+    this.title = articleRequest.title();
+    this.content = articleRequest.content();
+    this.schoolName = articleRequest.schoolName();
+    this.images = images.stream().map(MultipartFile::getOriginalFilename).toList();
+    this.tags = articleRequest.tags();
   }
 }

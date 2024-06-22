@@ -1,5 +1,8 @@
 package com.meogo.meogo_backend.domain.community.article.entity;
 
+import com.meogo.meogo_backend.domain.community.article.dto.ArticleRequest;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public interface ArticleModel {
@@ -9,6 +12,7 @@ public interface ArticleModel {
   String getSchoolName();
   List<String> getImages();
   List<String> getTags();
+  void update(ArticleRequest articleRequest, List<MultipartFile> images);
 
   static ArticleEntity createArticleEntity(String title, String content, String schoolName, List<String> images, List<String> tags) {
     return new ArticleEntity(title, content, schoolName, images, tags);

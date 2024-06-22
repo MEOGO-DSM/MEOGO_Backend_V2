@@ -1,11 +1,12 @@
 package com.meogo.meogo_backend.domain.community.article.service;
 
-import com.meogo.meogo_backend.domain.community.article.dto.ArticleCreateRequest;
+import com.meogo.meogo_backend.domain.community.article.dto.ArticleRequest;
 import com.meogo.meogo_backend.domain.community.article.dto.ArticleGetResponse;
 import com.meogo.meogo_backend.domain.community.article.entity.ArticleEntity;
 import com.meogo.meogo_backend.domain.community.article.entity.ArticleModel;
 import com.meogo.meogo_backend.domain.community.article.repository.ArticleRepository;
 import com.meogo.meogo_backend.domain.community.article.usecase.ArticleUseCase;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,10 +18,17 @@ import java.util.List;
 public class ArticleService implements ArticleUseCase {
 
   @Override
-  public void create(ArticleCreateRequest request, List<MultipartFile> images) {
+  public void create(ArticleRequest request, List<MultipartFile> images) {
     ArticleEntity entity = createEntity(request, images);
 
     repository.save(entity);
+  }
+
+  @Transactional
+  @Override
+  public void update(Long id, ArticleRequest request, List<MultipartFile> images) {
+    ArticleEntity findEntity = repository.findById(id).orElseThrow(RuntimeException::new);
+    findEntity.update(request, images);
   }
 
   @Override
@@ -30,7 +38,7 @@ public class ArticleService implements ArticleUseCase {
     return result.stream().map(ArticleGetResponse::of).toList();
   }
 
-  private ArticleEntity createEntity(ArticleCreateRequest request, List<MultipartFile> images) {
+  private ArticleEntity createEntity(ArticleRequest request, List<MultipartFile> images) {
     return ArticleModel.createArticleEntity(
             request.title(),
             request.content(),
