@@ -1,6 +1,7 @@
 package com.meogo.meogo_backend.domain.community.article.service;
 
 import com.meogo.meogo_backend.domain.community.article.dto.ArticleCreateRequest;
+import com.meogo.meogo_backend.domain.community.article.dto.ArticleGetResponse;
 import com.meogo.meogo_backend.domain.community.article.entity.ArticleEntity;
 import com.meogo.meogo_backend.domain.community.article.entity.ArticleModel;
 import com.meogo.meogo_backend.domain.community.article.repository.ArticleRepository;
@@ -22,7 +23,14 @@ public class ArticleService implements ArticleUseCase {
     repository.save(entity);
   }
 
-  private ArticleEntity createEntity(ArticleCreateRequest request, List<MultipartFile> images){
+  @Override
+  public List<ArticleGetResponse> findAll() {
+    List<ArticleEntity> result = repository.findAll();
+
+    return result.stream().map(ArticleGetResponse::of).toList();
+  }
+
+  private ArticleEntity createEntity(ArticleCreateRequest request, List<MultipartFile> images) {
     return ArticleModel.createArticleEntity(
             request.title(),
             request.content(),
