@@ -6,7 +6,7 @@ import com.meogo.meogo_backend.domain.community.article.entity.ArticleEntity;
 import com.meogo.meogo_backend.domain.community.article.entity.ArticleModel;
 import com.meogo.meogo_backend.domain.community.article.repository.ArticleRepository;
 import com.meogo.meogo_backend.domain.community.article.usecase.ArticleUseCase;
-import com.meogo.meogo_backend.global.exception.custom.NotFoundIdException;
+import com.meogo.meogo_backend.global.exception.custom.NotFoundArticleException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class ArticleService implements ArticleUseCase {
 
   @Override
   public void update(Long id, ArticleRequest request, List<MultipartFile> images) {
-    ArticleEntity findEntity = repository.findById(id).orElseThrow(NotFoundIdException::new);
+    ArticleEntity findEntity = repository.findById(id).orElseThrow(NotFoundArticleException::new);
     findEntity.update(request, images);
   }
 
