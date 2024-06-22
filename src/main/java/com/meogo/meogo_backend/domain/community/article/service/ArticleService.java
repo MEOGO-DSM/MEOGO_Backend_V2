@@ -50,6 +50,7 @@ public class ArticleService implements ArticleUseCase {
 
   private ArticleEntity createEntity(ArticleRequest request, List<MultipartFile> images) {
     return ArticleModel.createArticleEntity(
+            SecurityContextHolder.getContext().getAuthentication().getName(),
             request.title(),
             request.content(),
             request.schoolName(),
