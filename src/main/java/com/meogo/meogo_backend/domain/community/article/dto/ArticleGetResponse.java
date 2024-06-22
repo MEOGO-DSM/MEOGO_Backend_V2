@@ -6,6 +6,7 @@ import java.util.List;
 
 public record ArticleGetResponse(
         Long id,
+        String userName,
         String title,
         String content,
         String schoolName,
@@ -15,6 +16,7 @@ public record ArticleGetResponse(
   public static ArticleGetResponse of(ArticleEntity articleEntity){
     return new ArticleGetResponse(
             articleEntity.getId(),
+            articleEntity.getUserName(),
             articleEntity.getTitle(),
             articleEntity.getContent(),
             articleEntity.getSchoolName(),
