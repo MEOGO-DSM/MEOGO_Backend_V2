@@ -23,6 +23,13 @@ public class ArticleService implements ArticleUseCase {
     repository.save(entity);
   }
 
+  @Override
+  public List<ArticleGetResponse> findAll() {
+    List<ArticleEntity> result = repository.findAll();
+
+    return result.stream().map(ArticleGetResponse::of).toList();
+  }
+
   private ArticleEntity createEntity(ArticleCreateRequest request, List<MultipartFile> images) {
     return ArticleModel.createArticleEntity(
             request.title(),
@@ -32,14 +39,6 @@ public class ArticleService implements ArticleUseCase {
             request.tags()
     );
   }
-
-  @Override
-  public List<ArticleGetResponse> findAll() {
-    List<ArticleEntity> findAll = repository.findAll();
-
-    return findAll.stream().map(ArticleGetResponse::of).toList();
-  }
-
 
   private final ArticleRepository repository;
 }
