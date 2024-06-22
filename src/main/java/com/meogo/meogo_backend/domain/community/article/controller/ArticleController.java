@@ -31,6 +31,12 @@ public class ArticleController {
     articleUseCase.update(id, request, images);
   }
 
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void delete(@PathVariable(name = "id") Long id){
+    articleUseCase.delete(id);
+  }
+
   @GetMapping
   public List<ArticleGetResponse> getAll(){
     return articleUseCase.findAll();

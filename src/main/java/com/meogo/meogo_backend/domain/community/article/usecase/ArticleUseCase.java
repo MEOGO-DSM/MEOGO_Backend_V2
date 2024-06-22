@@ -11,5 +11,7 @@ public interface ArticleUseCase {
 
   void update(Long id, ArticleRequest request, List<MultipartFile> images);
 
+  void delete(Long id);
+
   List<ArticleGetResponse> findAll();
 }
