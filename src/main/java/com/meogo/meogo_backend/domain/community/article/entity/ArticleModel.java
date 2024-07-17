@@ -14,7 +14,7 @@ public interface ArticleModel {
   List<String> getTags();
   void update(ArticleRequest articleRequest, List<MultipartFile> images);
 
-  static ArticleEntity createArticleEntity(String title, String content, String schoolName, List<String> images, List<String> tags) {
-    return new ArticleEntity(title, content, schoolName, images, tags);
+  static ArticleEntity createArticleEntity(String userName, String title, String content, String schoolName, List<String> images, List<String> tags) {
+    return new ArticleEntity(userName, title, content, schoolName, images, tags);
   }
 }

@@ -6,13 +6,11 @@ import com.meogo.meogo_backend.domain.community.article.entity.ArticleEntity;
 import com.meogo.meogo_backend.domain.community.article.entity.ArticleModel;
 import com.meogo.meogo_backend.domain.community.article.repository.ArticleRepository;
 import com.meogo.meogo_backend.domain.community.article.usecase.ArticleUseCase;
+import com.meogo.meogo_backend.domain.user.model.UserEntity;
+import com.meogo.meogo_backend.global.current.CurrentUser;
 import com.meogo.meogo_backend.global.exception.custom.NotFoundArticleException;
-import com.meogo.meogo_backend.global.security.jwt.JwtProperties;
-import com.meogo.meogo_backend.global.security.jwt.Tokenizer;
-import io.jsonwebtoken.Jwts;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -50,6 +48,7 @@ public class ArticleService implements ArticleUseCase {
 
   private ArticleEntity createEntity(ArticleRequest request, List<MultipartFile> images) {
     return ArticleModel.createArticleEntity(
+            (UserEntity) currentUser.getCurrentUser(),
             request.title(),
             request.content(),
             request.schoolName(),
@@ -59,4 +58,5 @@ public class ArticleService implements ArticleUseCase {
   }
 
   private final ArticleRepository repository;
+  private final CurrentUser currentUser;
 }

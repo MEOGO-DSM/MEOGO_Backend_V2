@@ -16,6 +16,8 @@ public class ArticleEntity implements ArticleModel{
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  private String userName;
+
   @Column(nullable = false)
   @Length(min = 1, max = 20)
   private String title;
@@ -34,7 +36,8 @@ public class ArticleEntity implements ArticleModel{
 
   protected ArticleEntity(){}
 
-  protected ArticleEntity(String title, String content, String schoolName, List<String> images, List<String> tags){
+  protected ArticleEntity(String userName, String title, String content, String schoolName, List<String> images, List<String> tags){
+    this.userName = userName;
     this.title = title;
     this.content = content;
     this.schoolName = schoolName;
